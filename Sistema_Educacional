@@ -1,0 +1,41 @@
+@startuml
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Context.puml
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Component.puml
+
+LAYOUT_WITH_LEGEND()
+
+Person(person, "Usuário", "Usuário do Sistema")
+System_Boundary(system, "Sistema de Gestão Educacional") {
+    Container(webapp, "Aplicação Web", "Aplicação Web para os usuários")
+    Container(auth, "Serviço de Autenticação", "Serviço responsável pela autenticação dos usuários")
+    Container(course, "Serviço de Gestão de Cursos", "Serviço responsável pela gestão de cursos")
+    Container(student, "Serviço de Gestão de Alunos", "Serviço responsável pela gestão de alunos")
+    Container(enrollment, "Serviço de Matrícula em Cursos", "Serviço responsável pela matrícula dos alunos nos cursos")
+    Container(content, "Serviço de Conteúdo Educacional", "Serviço responsável pela disponibilização de materiais educacionais")
+    Container(assessment, "Serviço de Avaliação", "Serviço responsável pela criação e correção de avaliações")
+    Container(communication, "Serviço de Comunicação", "Serviço responsável pela comunicação entre alunos e professores")
+    Container(academic, "Serviço de Acompanhamento Acadêmico", "Serviço responsável pelo acompanhamento acadêmico dos alunos")
+}
+
+Rel(person, system, "Utiliza")
+
+Rel(webapp, auth, "Utiliza")
+Rel(webapp, course, "Utiliza")
+Rel(webapp, student, "Utiliza")
+Rel(webapp, enrollment, "Utiliza")
+Rel(webapp, content, "Utiliza")
+Rel(webapp, assessment, "Utiliza")
+Rel(webapp, communication, "Utiliza")
+Rel(webapp, academic, "Utiliza")
+
+Rel(auth, system, "Fornece autenticação")
+Rel(course, system, "Fornece gestão de cursos")
+Rel(student, system, "Fornece gestão de alunos")
+Rel(enrollment, system, "Gerencia matrículas em cursos")
+Rel(content, system, "Fornece conteúdo educacional")
+Rel(assessment, system, "Fornece avaliações")
+Rel(communication, system, "Fornece comunicação")
+Rel(academic, system, "Fornece acompanhamento acadêmico")
+
+@enduml
